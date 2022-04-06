@@ -36,7 +36,9 @@ module.exports = {
       var modelUpdated = {};
 
       if (nome) modelUpdated.nome = nome;
-      if (dt_nascimento) modelUpdated.dt_nascimento = dt_nascimento;
+      if (dt_nascimento) modelUpdated.dt_nascimento = parse(dt_nascimento, "dd/MM/yyyy", new Date(), {
+        locale: ptBR,
+      });
       if (pais) modelUpdated.pais = pais;
       if (timeId) modelUpdated.timeId = timeId;
 

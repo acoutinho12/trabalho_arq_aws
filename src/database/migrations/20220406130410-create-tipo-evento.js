@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.createTable("torneios", {
+    return queryInterface.createTable("tipo_eventos", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,14 +13,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      dataInicio: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-      },
-      dataFim: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -28,11 +20,11 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
   async down(queryInterface, _Sequelize) {
-    return queryInterface.dropTable("torneios");
+    return queryInterface.dropTable("tipo_eventos");
   },
 };

@@ -9,6 +9,7 @@
   "dependencies": {
     "date-fns": "^2.28.0",
     "express": "^4.17.3",
+    "kafkajs": "^1.16.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.18.0"
   },
