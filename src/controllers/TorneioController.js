@@ -16,7 +16,7 @@ module.exports = {
         .status(torneio > 0 ? 200 : 404)
         .json(
           torneio > 0
-            ? torneio
+            ? { mensagem: "Torneio apagado com sucesso." }
             : { mensagem: "Nenhum torneio com o id encontrado." }
         );
     } catch (e) {

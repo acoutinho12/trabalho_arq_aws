@@ -17,7 +17,7 @@ module.exports = {
         .status(evento > 0 ? 200 : 404)
         .json(
           evento > 0
-            ? evento
+            ? { mensagem: "Evento apagado com sucesso." }
             : { mensagem: "Nenhum evento com o id encontrado." }
         );
     } catch (e) {

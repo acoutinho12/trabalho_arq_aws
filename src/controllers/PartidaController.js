@@ -18,7 +18,7 @@ module.exports = {
         .status(partida > 0 ? 200 : 404)
         .json(
           partida > 0
-            ? partida
+            ? { mensagem: "Partida apagada com sucesso." }
             : { mensagem: "Nenhuma partida com o id encontrado." }
         );
     } catch (e) {

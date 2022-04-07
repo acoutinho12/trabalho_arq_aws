@@ -14,7 +14,7 @@ module.exports = {
         .status(time > 0 ? 200 : 404)
         .json(
           time > 0
-            ? time
+            ? { mensagem: "Time apagado com sucesso." }
             : { mensagem: "Nenhum time com o id encontrado." }
         );
     } catch (e) {

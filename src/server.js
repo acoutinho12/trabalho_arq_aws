@@ -4,6 +4,16 @@ const { Kafka, logLevel } = require("kafkajs");
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
+// Add this to the VERY top of the first file loaded in your app
+var apm = require('elastic-apm-node').start({
+  // Override service name from package.json
+  // Allowed characters: a-z, A-Z, 0-9, -, _, and space
+  serviceName: 'trabalho_final_arq_aws',
+
+  // Set custom APM Server URL (default: http://localhost:8200)
+  serverUrl: 'http://localhost:9200'
+})
+
 require("./database");
 
 const app = express();

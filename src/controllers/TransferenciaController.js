@@ -16,7 +16,7 @@ module.exports = {
         .status(transferencia > 0 ? 200 : 404)
         .json(
           transferencia > 0
-            ? transferencia
+            ? { mensagem: "Transferencia apagada com sucesso." }
             : { mensagem: "Nenhum transferencia com o id encontrado." }
         );
     } catch (e) {

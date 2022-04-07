@@ -558,7 +558,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#components/schemas/TransferenciaRequestBody"
+                                "$ref": "#components/schemas/TorneioRequestBody"
                             },
                             "examples": {
                                 "torneio": {
@@ -628,6 +628,654 @@
                     },
                     "404": {
                         "description": "Torneio não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/partidas": {
+            "post": {
+                "summary": "Cadastro de partida",
+                "description": "Rota responsável pelo cadastro de uma nova partida",
+                "tags": [
+                    "Partidas"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/PartidaRequestBody"
+                            },
+                            "examples": {
+                                "partida": {
+                                    "value": {
+                                        "dataHoraInicio": "20/02/2022 15:00:00",
+                                        "dataHoraFim": "20/02/2022 15:00:00",
+                                        "dataHoraIntervalo": "20/02/2022 15:00:00",
+                                        "estadio": "Mineirão",
+                                        "timeCasaId": 1,
+                                        "timeForaId": 2,
+                                        "torneioId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/partidas/{id}": {
+            "get": {
+                "summary": "Buscar partida",
+                "description": "Rota responsável pela busca de um partida pelo id",
+                "tags": [
+                    "Partidas"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do partida para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Partida encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Partida"
+                                },
+                                "examples": {
+                                    "partida": {
+                                        "value": {
+                                            "id": 1,
+                                            "dataHoraInicio": "20/02/2022 15:00:00",
+                                            "dataHoraFim": "20/02/2022 15:00:00",
+                                            "dataHoraIntervalo": "20/02/2022 15:00:00",
+                                            "estadio": "Mineirão",
+                                            "timeCasaId": 1,
+                                            "timeForaId": 2,
+                                            "torneioId": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Partida não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar partida",
+                "description": "Rota responsável por atualizar os dados de um partida pelo id",
+                "tags": [
+                    "Partidas"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/PartidaRequestBody"
+                            },
+                            "examples": {
+                                "partida": {
+                                    "value": {
+                                        "dataHoraInicio": "20/02/2022 15:00:00",
+                                        "dataHoraFim": "20/02/2022 15:00:00",
+                                        "dataHoraIntervalo": "20/02/2022 15:00:00",
+                                        "estadio": "Mineirão",
+                                        "timeCasaId": 1,
+                                        "timeForaId": 2,
+                                        "torneioId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da partida para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Partida encontrada e atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Partida"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Partida não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar partida",
+                "description": "Rota responsável por apagar um partida pelo id",
+                "tags": [
+                    "Partidas"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da partida para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Partida encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Partida"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Partida não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/tipo-eventos": {
+            "post": {
+                "summary": "Cadastro de tipoEvento",
+                "description": "Rota responsável pelo cadastro de uma nova tipoEvento",
+                "tags": [
+                    "TipoEvento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TipoEventoRequestBody"
+                            },
+                            "examples": {
+                                "tipoEvento": {
+                                    "value": {
+                                        "nome": "Gol"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tipo-eventos/{id}": {
+            "get": {
+                "summary": "Buscar tipoEvento",
+                "description": "Rota responsável pela busca de um tipoEvento pelo id",
+                "tags": [
+                    "TipoEvento"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do tipoEvento para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "TipoEvento encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/TipoEvento"
+                                },
+                                "examples": {
+                                    "tipoEvento": {
+                                        "value": {
+                                            "id": 1,
+                                            "nome": "Gol"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "TipoEvento não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar tipoEvento",
+                "description": "Rota responsável por atualizar os dados de um tipoEvento pelo id",
+                "tags": [
+                    "TipoEvento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TipoEventoRequestBody"
+                            },
+                            "examples": {
+                                "tipoEvento": {
+                                    "value": {
+                                        "nome": "Gol"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da tipoEvento para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "TipoEvento encontrada e atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/TipoEvento"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "TipoEvento não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar tipoEvento",
+                "description": "Rota responsável por apagar um tipoEvento pelo id",
+                "tags": [
+                    "TipoEvento"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do tipoEvento para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "TipoEvento encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/TipoEvento"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "TipoEvento não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/eventos": {
+            "post": {
+                "summary": "Cadastro de evento",
+                "description": "Rota responsável pelo cadastro de uma nova evento",
+                "tags": [
+                    "Evento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/EventoRequestBody"
+                            },
+                            "examples": {
+                                "evento": {
+                                    "value": {
+                                        "tipoEventoId": 1,
+                                        "jogadorId": 1,
+                                        "timeId": 1,
+                                        "partidaId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/eventos/{id}": {
+            "get": {
+                "summary": "Buscar evento",
+                "description": "Rota responsável pela busca de um evento pelo id",
+                "tags": [
+                    "Evento"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do evento para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Evento"
+                                },
+                                "examples": {
+                                    "evento": {
+                                        "value": {
+                                            "id": 1,
+                                            "tipoEventoId": 1,
+                                            "jogadorId": 1,
+                                            "timeId": 1,
+                                            "partidaId": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar evento",
+                "description": "Rota responsável por atualizar os dados de um evento pelo id",
+                "tags": [
+                    "Evento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/EventoRequestBody"
+                            },
+                            "examples": {
+                                "evento": {
+                                    "value": {
+                                        "tipoEventoId": 1,
+                                        "jogadorId": 1,
+                                        "timeId": 1,
+                                        "partidaId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da evento para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento encontrada e atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar evento",
+                "description": "Rota responsável por apagar um evento pelo id",
+                "tags": [
+                    "Evento"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do evento para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/torneios/{idTorneio}/partidas/{idPartida}/eventos/gol": {
+            "post": {
+                "summary": "Cadastro de evento",
+                "description": "Rota responsável pelo cadastro de um evento de gol",
+                "tags": [
+                    "Gol"
+                ],
+                "parameters": [
+                    {
+                        "name": "idTorneio",
+                        "in": "path",
+                        "description": "id do torneio para criar o evento na partida",
+                        "required": true
+                    },
+                    {
+                        "name": "idPartida",
+                        "in": "path",
+                        "description": "id do torneio para criar o evento na partida",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/EventoPartidaRequestBody"
+                            },
+                            "examples": {
+                                "eventoPartida": {
+                                    "value": {
+                                        "jogadorId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento de gol criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/torneios/{idTorneio}/partidas/{idPartida}/eventos/cartao-amarelo": {
+            "post": {
+                "summary": "Cadastro de evento",
+                "description": "Rota responsável pelo cadastro de um evento de cartão amarelo",
+                "tags": [
+                    "Cartão Amarelo"
+                ],
+                "parameters": [
+                    {
+                        "name": "idTorneio",
+                        "in": "path",
+                        "description": "id do torneio para criar o evento na partida",
+                        "required": true
+                    },
+                    {
+                        "name": "idPartida",
+                        "in": "path",
+                        "description": "id do torneio para criar o evento na partida",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/EventoPartidaRequestBody"
+                            },
+                            "examples": {
+                                "eventoPartida": {
+                                    "value": {
+                                        "jogadorId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento de cartão amarelo criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/torneios/{idTorneio}/partidas/{idPartida}/eventos/cartao-vermelho": {
+            "post": {
+                "summary": "Cadastro de evento",
+                "description": "Rota responsável pelo cadastro de um evento de cartão vermelho",
+                "tags": [
+                    "Cartão Vermelho"
+                ],
+                "parameters": [
+                    {
+                        "name": "idTorneio",
+                        "in": "path",
+                        "description": "id do torneio para criar o evento na partida",
+                        "required": true
+                    },
+                    {
+                        "name": "idPartida",
+                        "in": "path",
+                        "description": "id do torneio para criar o evento na partida",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/EventoPartidaRequestBody"
+                            },
+                            "examples": {
+                                "eventoPartida": {
+                                    "value": {
+                                        "jogadorId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento de cartão vermelho criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
                     },
                     "500": {
                         "description": "Erro interno do servidor."
@@ -781,6 +1429,131 @@
                     "dataFim": {
                         "type": "string",
                         "format": "date"
+                    }
+                }
+            },
+            "Partida": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "dataHoraInicio": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "dataHoraFim": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "dataHoraIntervalo": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "estadio": {
+                        "type": "string"
+                    },
+                    "timeCasaId": {
+                        "type": "integer"
+                    },
+                    "timeForaId": {
+                        "type": "integer"
+                    },
+                    "torneioId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PartidaRequestBody": {
+                "type": "object",
+                "properties": {
+                    "dataHoraInicio": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "dataHoraFim": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "dataHoraIntervalo": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "estadio": {
+                        "type": "string"
+                    },
+                    "timeCasaId": {
+                        "type": "integer"
+                    },
+                    "timeForaId": {
+                        "type": "integer"
+                    },
+                    "torneioId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "TipoEventoRequestBody": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    }
+                }
+            },
+            "TipoEvento": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    }
+                }
+            },
+            "EventoRequestBody": {
+                "type": "object",
+                "properties": {
+                    "tipoEventoId": {
+                        "type": "integer"
+                    },
+                    "jogadorId": {
+                        "type": "integer"
+                    },
+                    "timeId": {
+                        "type": "integer"
+                    },
+                    "partidaId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Evento": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "tipoEventoId": {
+                        "type": "integer"
+                    },
+                    "jogadorId": {
+                        "type": "integer"
+                    },
+                    "timeId": {
+                        "type": "integer"
+                    },
+                    "partidaId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "EventoPartidaRequestBody": {
+                "type": "object",
+                "properties": {
+                    "jogadorId": {
+                        "type": "integer"
                     }
                 }
             }

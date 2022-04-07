@@ -14,7 +14,7 @@ module.exports = {
         .status(tipoEvento > 0 ? 200 : 404)
         .json(
           tipoEvento > 0
-            ? tipoEvento
+            ? { mensagem: "Tipo de Evento apagado com sucesso." }
             : { mensagem: "Nenhum tipo de evento com o id encontrado." }
         );
     } catch (e) {

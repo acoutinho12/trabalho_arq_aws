@@ -17,7 +17,7 @@ module.exports = {
         .status(jogador > 0 ? 200 : 404)
         .json(
           jogador > 0
-            ? jogador
+            ? { mensagem: "Jogador apagado com sucesso." }
             : { mensagem: "Nenhum jogador com o id encontrado." }
         );
     } catch (e) {
