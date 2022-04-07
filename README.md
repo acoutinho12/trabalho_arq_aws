@@ -17,7 +17,7 @@
 
 1. Rode `yarn` para instalar as dependências.<br />
 2. Rode `yarn dev` para rodar o nodemon que irá iniciar a aplicação na porta 3333.
-3. Rode `docker-composer up -d` para subir o container do kafka na porta 9092 e para visualização na porta 19000.
+3. Rode `docker-composer up -d` para subir o container do kafka na porta 9092 e para visualização na porta 19000. Além do Kafka, o elastic estará na porta 5601 para visualização dos dashboards e da Observabilidade e na porta 9200 para visualização das configurações.
 
 ## Utilidades localhost
 
