@@ -4,9 +4,9 @@
 
 - André Luis Barbosa Coutinho - 138796
 
-## Dependencies
+## Dependencias
 
-- [Node.js](https://nodejs.org/en/) >= 8.0.0
+- [Node.js](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/pt-BR/docs/install)
 - [Docker](https://docs.docker.com/install/)
 - [KafkaJs](https://kafka.js.org/)
