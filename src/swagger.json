@@ -1,0 +1,789 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de torneios de Futebol",
+        "description": "API para criação de torneios de futebol, partidas de futebol com seus respectivos eventos e times com seus jogadores.",
+        "contact": {
+            "name": "André Luis",
+            "url": "https://github.com/acoutinho12",
+            "email": "acoutinho12@outlook.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3333/v1",
+            "description": "API Local"
+        }
+    ],
+    "paths": {
+        "/times": {
+            "post": {
+                "summary": "Cadastro de time",
+                "description": "Rota responsável pelo cadastro de um novo time",
+                "tags": [
+                    "Times"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TimeRequestBody"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/times/{id}": {
+            "get": {
+                "summary": "Buscar time",
+                "description": "Rota responsável pela busca de um time pelo id",
+                "tags": [
+                    "Times"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do time para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Time encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Time"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Time não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar time",
+                "description": "Rota responsável por atualizar os dados de um time pelo id",
+                "tags": [
+                    "Times"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/Time"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do time para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Time encontrado e atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Time"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Time não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar time",
+                "description": "Rota responsável por apagar um time pelo id",
+                "tags": [
+                    "Times"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do time para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Time encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Time"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Time não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/jogadores": {
+            "post": {
+                "summary": "Cadastro de jogador",
+                "description": "Rota responsável pelo cadastro de um novo jogador",
+                "tags": [
+                    "Jogadores"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/JogadorRequestBody"
+                            },
+                            "examples": {
+                                "jogador": {
+                                    "value": {
+                                        "nome": "André Luis",
+                                        "dt_nascimento": "20/02/1993",
+                                        "pais": "Brasil",
+                                        "timeId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jogadores/{id}": {
+            "get": {
+                "summary": "Buscar jogador",
+                "description": "Rota responsável pela busca de um jogador pelo id",
+                "tags": [
+                    "Jogadores"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do jogador para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Jogador encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Jogador"
+                                },
+                                "examples": {
+                                    "jogador": {
+                                        "value": {
+                                            "id": 1,
+                                            "nome": "André Luis",
+                                            "dt_nascimento": "20/02/1993",
+                                            "pais": "Brasil",
+                                            "timeId": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Jogador não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar jogador",
+                "description": "Rota responsável por atualizar os dados de um jogador pelo id",
+                "tags": [
+                    "Jogadores"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/JogadorRequestBody"
+                            },
+                            "examples": {
+                                "jogador": {
+                                    "value": {
+                                        "nome": "André Luis",
+                                        "dt_nascimento": "20/02/1993",
+                                        "pais": "Brasil",
+                                        "timeId": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do jogador para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Jogador encontrado e atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Jogador"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Jogador não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar jogador",
+                "description": "Rota responsável por apagar um jogador pelo id",
+                "tags": [
+                    "Jogadores"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do jogador para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Jogador encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Jogador"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Jogador não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/transferencias": {
+            "post": {
+                "summary": "Cadastro de transferencia",
+                "description": "Rota responsável pelo cadastro de uma nova transferencia",
+                "tags": [
+                    "Transferencias"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TransferenciaRequestBody"
+                            },
+                            "examples": {
+                                "transferencia": {
+                                    "value": {
+                                        "data": "20/02/1993",
+                                        "valor": 300.00,
+                                        "jogadorIdOrigem": 1,
+                                        "timeIdOrigem": 1,
+                                        "timeIdDestino": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transferencias/{id}": {
+            "get": {
+                "summary": "Buscar transferencia",
+                "description": "Rota responsável pela busca de uma transferencia pelo id",
+                "tags": [
+                    "Transferencias"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do transferencia para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transferencia encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Transferencia"
+                                },
+                                "examples": {
+                                    "transferencia": {
+                                        "value": {
+                                            "id": 1,
+                                            "data": "20/02/1993",
+                                            "valor": 300.00,
+                                            "jogadorIdOrigem": 1,
+                                            "timeIdOrigem": 1,
+                                            "timeIdDestino": 2
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Transferencia não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar transferencia",
+                "description": "Rota responsável por atualizar os dados de um transferencia pelo id",
+                "tags": [
+                    "Transferencias"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TransferenciaRequestBody"
+                            },
+                            "examples": {
+                                "transferencia": {
+                                    "value": {
+                                        "data": "20/02/1993",
+                                        "valor": 300.00,
+                                        "jogadorIdOrigem": 1,
+                                        "timeIdOrigem": 1,
+                                        "timeIdDestino": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da transferencia para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transferencia encontrada e atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Transferencia"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Transferencia não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar transferencia",
+                "description": "Rota responsável por apagar um transferencia pelo id",
+                "tags": [
+                    "Transferencias"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da transferencia para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transferencia encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Transferencia"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Transferencia não encontrada pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        },
+        "/torneios": {
+            "post": {
+                "summary": "Cadastro de torneio",
+                "description": "Rota responsável pelo cadastro de uma nova torneio",
+                "tags": [
+                    "Torneios"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TorneioRequestBody"
+                            },
+                            "examples": {
+                                "torneio": {
+                                    "value": {
+                                        "nome": "Campeonato Mineiro",
+                                        "dataInicio": "20/02/2022",
+                                        "dataFim": "20/12/2022"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/torneios/{id}": {
+            "get": {
+                "summary": "Buscar torneio",
+                "description": "Rota responsável pela busca de um torneio pelo id",
+                "tags": [
+                    "Torneios"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do torneio para busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Torneio encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Torneio"
+                                },
+                                "examples": {
+                                    "torneio": {
+                                        "value": {
+                                            "id": 1,
+                                            "nome": "Campeonato Mineiro",
+                                            "dataInicio": "20/02/2022",
+                                            "dataFim": "20/12/2022"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Torneio não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar torneio",
+                "description": "Rota responsável por atualizar os dados de um torneio pelo id",
+                "tags": [
+                    "Torneios"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/TransferenciaRequestBody"
+                            },
+                            "examples": {
+                                "torneio": {
+                                    "value": {
+                                        "nome": "Campeonato Mineiro",
+                                        "dataInicio": "20/02/2022",
+                                        "dataFim": "20/12/2022"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da torneio para atualizar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Torneio encontrada e atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Torneio"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Torneio não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Apagar torneio",
+                "description": "Rota responsável por apagar um torneio pelo id",
+                "tags": [
+                    "Torneios"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da torneio para apagar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Torneio encontrado e apagado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Torneio"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Torneio não encontrado pelo id"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TimeRequestBody": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "localidade": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Time": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "localidade": {
+                        "type": "string"
+                    }
+                }
+            },
+            "JogadorRequestBody": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "dt_nascimento": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "pais": {
+                        "type": "string"
+                    },
+                    "timeId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Jogador": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "dt_nascimento": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "pais": {
+                        "type": "string"
+                    },
+                    "timeId": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Transferencia": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "valor": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "jogadorIdOrigem": {
+                        "type": "integer"
+                    },
+                    "timeIdOrigem": {
+                        "type": "integer"
+                    },
+                    "timeIdDestino": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "TransferenciaRequestBody": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "valor": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "jogadorIdOrigem": {
+                        "type": "integer"
+                    },
+                    "timeIdOrigem": {
+                        "type": "integer"
+                    },
+                    "timeIdDestino": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Torneio": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "dataInicio": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dataFim": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                }
+            },
+            "TorneioRequestBody": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "dataInicio": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dataFim": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                }
+            }
+        }
+    }
+}

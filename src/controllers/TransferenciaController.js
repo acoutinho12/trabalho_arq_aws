@@ -103,6 +103,15 @@ module.exports = {
       timeIdDestino,
     });
 
+    await req.producer.send({
+      topic: "realizar-transferencia",
+      messages: [
+        {
+          value: `Transferencia realizada com sucesso`,
+        },
+      ],
+    });
+
     return res.json(transferencia);
   },
 };

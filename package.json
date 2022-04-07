@@ -11,7 +11,8 @@
     "express": "^4.17.3",
     "kafkajs": "^1.16.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.18.0"
+    "sequelize": "^6.18.0",
+    "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
